@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build
+      run: |
+        echo "Building the application..."
+        # Add build commands here, e.g., npm install, dotnet build, etc.
+        echo "Build completed."
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Run Tests
+      run: |
+        echo "Running tests..."
+        # Add test commands here, e.g., npm test, dotnet test, etc.
+        echo "Tests completed."
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy
+      run: |
+        echo "Deploying the application..."
+        # Add deploy commands here, e.g., kubectl apply, scp, etc.
+        echo "Deployment completed."
